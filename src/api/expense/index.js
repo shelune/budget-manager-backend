@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { token } from '../../services/passport'
-import { create, index, show, update, destroy, showCategories } from './controller'
+import { create, index, show, update, destroy, showExpenseCategories, showIncomeCategories } from './controller'
 import { schema } from './model'
 export Expense, { schema } from './model'
 
@@ -43,9 +43,13 @@ router.get('/',
   query(),
   index)
 
-  router.get('/categories',
-    token({required: true}),
-    showCategories)
+router.get('/categoriesExpense',
+  token({required: true}),
+  showExpenseCategories)
+
+router.get('/categoriesIncome',
+  token({required: true}),
+  showIncomeCategories)
 
 /**
  * @api {get} /expenses/:id Retrieve expense
